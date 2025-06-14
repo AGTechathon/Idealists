@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikshak Mitra - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1a202c;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .app-container {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #8b5cf6;
+            border-radius: 10px;
+            border: 2px solid #2a2a2a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #a78bfa;
+        }
+
+        .bot-card {
+            flex: 0 0 auto;
+            width: 280px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #1f2937;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .bot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #8b5cf6;
+        }
+
+        .bot-card img {
+            border-radius: 0.5rem;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <video autoPlay loop muted class="video-background" src="https://assets.mixkit.co/videos/preview/mixkit-hi-tech-global-connection-lines-background-4k-4886.mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="app-container">
+        <nav class="w-full py-4 px-6 bg-gradient-to-r from-purple-700 to-indigo-700 shadow-lg flex justify-between items-center flex-shrink-0">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white pl-4">Shikshak मित्र</h2>
+            <div class="relative">
+                <input type="text" placeholder="Search bots..." class="bg-gray-700 text-white placeholder-gray-400 p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 pr-10">
+                <i class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </nav>
+
+        <div class="flex flex-1 overflow-hidden">
+            <aside class="w-64 flex-shrink-0 bg-gray-800 p-6 flex flex-col justify-between text-white custom-scrollbar overflow-y-auto border-r border-gray-700">
+                <button id="create-new-bot-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300 text-base mb-8">
+                    <i class="fas fa-plus-circle mr-2"></i> Create New Bot
+                </button>
+
+                <div class="flex-1 overflow-y-auto custom-scrollbar pr-2 mb-8">
+                    <h4 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 text-purple-300">History</h4>
+                    <ul class="space-y-3">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> Math Class 1
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> Science Project
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> English Grammar
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> History Quiz Prep
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> Algebra Basics
+                        </li>
+                         <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> Physics Laws
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> Literature Analysis
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> World Wars Overview
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> Geometry Concepts
+                        </li>
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-history mr-2 text-gray-400"></i> Chemistry Elements
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col items-center pt-8 border-t border-gray-700">
+                    <img src="https://placehold.co/80x80/6B46C1/FFFFFF/png?text=User" alt="User Profile" class="w-20 h-20 rounded-full object-cover border-4 border-purple-500 shadow-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-1">Jane Doe</h3>
+                    <p class="text-sm text-gray-400">Student</p>
+                </div>
+            </aside>
+
+            <main class="flex-1 bg-gray-900 p-6 text-white custom-scrollbar overflow-y-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-purple-300">Welcome back, Jane Doe!</h2>
+                
+                <section id="for-you-section" class="mb-10">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-300">For You</h3>
+                    <div id="for-you-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
+                        </div>
+                </section>
+
+                <section id="popular-section" class="mb-10">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-300">Popular Bots</h3>
+                    <div id="popular-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
+                    </div>
+                </section>
+
+                <section id="recently-created-section" class="mb-10">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-300">Recently Created</h3>
+                    <div id="recently-created-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
+                        <div class="bot-card border-green-600">
+                            <img src="https://placehold.co/100x100/32CD32/FFFFFF?text=My+Bot+1" alt="My Custom Bot 1" class="w-full h-24 mb-2">
+                            <h3 class="text-lg font-bold text-green-300">My Custom Bot 1</h3>
+                            <p class="text-gray-400 text-xs mb-3">Your first customized learning helper.</p>
+                            <div class="flex justify-between items-center text-gray-500 text-sm">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i> NEW!
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-full text-xs">Chat</button>
+                            </div>
+                        </div>
+                        <div class="bot-card border-orange-600">
+                            <img src="https://placehold.co/100x100/FF8C00/FFFFFF?text=My+Bot+2" alt="My Custom Bot 2" class="w-full h-24 mb-2">
+                            <h3 class="text-lg font-bold text-orange-300">My Custom Bot 2</h3>
+                            <p class="text-gray-400 text-xs mb-3">Exploring history with a new perspective.</p>
+                            <div class="flex justify-between items-center text-gray-500 text-sm">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i> NEW!
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-full text-xs">Chat</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        let userAge = 25;
+
+        function renderBotCard(bot) {
+            return `
+                <div class="bot-card">
+                    <img src="${bot.imageUrl}" alt="${bot.name}" class="w-full h-24 mb-2">
+                    <h3 class="text-lg font-bold ${bot.textColor}">${bot.name}</h3>
+                    <p class="text-gray-400 text-xs mb-3">${bot.description}</p>
+                    <div class="flex justify-between items-center text-gray-500 text-sm">
+                        <i class="${bot.icon} ${bot.iconColor} mr-1"></i> ${bot.likes}
+                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-full text-xs">Chat</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        const cartoonBots = [
+            {
+                name: 'Doraemon',
+                description: 'The futuristic robot cat from the 22nd century.',
+                imageUrl: 'https://placehold.co/100x100/FFD1DC/FF69B4?text=Doraemon',
+                textColor: 'text-pink-300',
+                icon: 'fas fa-star',
+                iconColor: 'text-yellow-400',
+                likes: '99.9K'
+            },
+            {
+                name: 'Shin-chan',
+                description: 'A mischievous kindergartner with a quirky family.',
+                imageUrl: 'https://placehold.co/100x100/ADD8E6/6A5ACD?text=Shinchan',
+                textColor: 'text-blue-300',
+                icon: 'fas fa-star',
+                iconColor: 'text-yellow-400',
+                likes: '85.2K'
+            },
+            {
+                name: 'Nobita Nobi',
+                description: 'Doraemon\'s best friend, always in need of help.',
+                imageUrl: 'https://placehold.co/100x100/DDA0DD/800080?text=Nobita',
+                textColor: 'text-purple-300',
+                icon: 'fas fa-star',
+                iconColor: 'text-yellow-400',
+                likes: '70.5K'
+            },
+            {
+                name: 'Chhota Bheem',
+                description: 'The brave and strong hero of Dholakpur.',
+                imageUrl: 'https://placehold.co/100x100/F08080/CD5C5C?text=Bheem',
+                textColor: 'text-red-300',
+                icon: 'fas fa-star',
+                iconColor: 'text-yellow-400',
+                likes: '120K'
+            }
+        ];
+
+        const animeBots = [
+            {
+                name: 'Naruto Uzumaki',
+                description: 'A spirited ninja aiming to become Hokage.',
+                imageUrl: 'https://placehold.co/100x100/FFD700/000000?text=Naruto',
+                textColor: 'text-yellow-300',
+                icon: 'fas fa-fire',
+                iconColor: 'text-orange-400',
+                likes: '1.2M'
+            },
+            {
+                name: 'Son Goku',
+                description: 'The Saiyan protector of Earth.',
+                imageUrl: 'https://placehold.co/100x100/FFA07A/FF6347?text=Goku',
+                textColor: 'text-red-300',
+                icon: 'fas fa-bolt',
+                iconColor: 'text-yellow-400',
+                likes: '2.5M'
+            },
+            {
+                name: 'Sailor Moon',
+                description: 'Guardian of love and justice.',
+                imageUrl: 'https://placehold.co/100x100/DA70D6/BA55D3?text=Sailor',
+                textColor: 'text-purple-300',
+                icon: 'fas fa-moon',
+                iconColor: 'text-blue-400',
+                likes: '980K'
+            },
+            {
+                name: 'Eren Yeager',
+                description: 'A passionate soldier fighting for humanity\'s freedom.',
+                imageUrl: 'https://placehold.co/100x100/A9A9A9/000000?text=Eren',
+                textColor: 'text-gray-300',
+                icon: 'fas fa-sword',
+                iconColor: 'text-gray-400',
+                likes: '1.8M'
+            }
+        ];
+
+        const bollywoodBots = [
+            {
+                name: 'Rahul (SRK)',
+                description: 'The epitome of romance, charm, and grand gestures.',
+                imageUrl: 'https://placehold.co/100x100/87CEEB/4682B4?text=SRK',
+                textColor: 'text-blue-300',
+                icon: 'fas fa-film',
+                iconColor: 'text-pink-400',
+                likes: '3.1M'
+            },
+            {
+                name: 'Geet (Kareena)',
+                description: 'The lively, bubbly, and unforgettable character from Jab We Met.',
+                imageUrl: 'https://placehold.co/100x100/FF69B4/FF1493?text=Geet',
+                textColor: 'text-pink-300',
+                icon: 'fas fa-star',
+                iconColor: 'text-yellow-400',
+                likes: '2.8M'
+            },
+            {
+                name: 'Munna Bhai',
+                description: 'The lovable goon with a heart of gold, advocating for Gandhigiri.',
+                imageUrl: 'https://placehold.co/100x100/BDB76B/6B8E23?text=Munna',
+                textColor: 'text-yellow-600',
+                icon: 'fas fa-laugh-squint',
+                iconColor: 'text-green-400',
+                likes: '2.2M'
+            },
+            {
+                name: 'Simran (Kajol)',
+                description: 'The dreamy and traditional girl looking for her true love in Europe.',
+                imageUrl: 'https://placehold.co/100x100/DDA0DD/800080?text=Simran',
+                textColor: 'text-purple-300',
+                icon: 'fas fa-heart',
+                iconColor: 'text-red-400',
+                likes: '2.9M'
+            }
+        ];
+
+        const popularCartoonBots = [
+            {
+                name: 'Ben 10',
+                description: 'An adventurous boy with an alien watch.',
+                imageUrl: 'https://placehold.co/100x100/FF4500/FFFFFF?text=Ben10',
+                textColor: 'text-orange-300',
+                icon: 'fas fa-star',
+                iconColor: 'text-yellow-400',
+                likes: '150K'
+            },
+            {
+                name: 'Tom & Jerry',
+                description: 'Classic cat and mouse duo.',
+                imageUrl: 'https://placehold.co/100x100/7CFC00/FFFFFF?text=T%26J',
+                textColor: 'text-green-300',
+                icon: 'fas fa-heart',
+                iconColor: 'text-red-400',
+                likes: '200K'
+            }
+        ];
+
+        const popularAnimeBots = [
+            {
+                name: 'Monkey D. Luffy',
+                description: 'Pirate captain with a dream to find One Piece.',
+                imageUrl: 'https://placehold.co/100x100/FFD700/000000?text=Luffy',
+                textColor: 'text-yellow-300',
+                icon: 'fas fa-anchor',
+                iconColor: 'text-blue-400',
+                likes: '3.5M'
+            },
+            {
+                name: 'Levi Ackerman',
+                description: 'Humanity\'s strongest soldier.',
+                imageUrl: 'https://placehold.co/100x100/A9A9A9/000000?text=Levi',
+                textColor: 'text-gray-300',
+                icon: 'fas fa-bolt',
+                iconColor: 'text-yellow-400',
+                likes: '2.8M'
+            }
+        ];
+
+        const popularBollywoodBots = [
+            {
+                name: 'Bajirao (Ranveer)',
+                description: 'A Maratha Peshwa known for his courage and love.',
+                imageUrl: 'https://placehold.co/100x100/A020F0/FFFFFF?text=Bajirao',
+                textColor: 'text-purple-300',
+                icon: 'fas fa-fire',
+                iconColor: 'text-red-400',
+                likes: '1.5M'
+            },
+            {
+                name: 'Piku (Deepika)',
+                description: 'A strong-willed architect navigating family life.',
+                imageUrl: 'https://placehold.co/100x100/FFC0CB/FF69B4?text=Piku',
+                textColor: 'text-pink-300',
+                icon: 'fas fa-user-tie',
+                iconColor: 'text-gray-400',
+                likes: '1.2M'
+            }
+        ];
+
+        function displayBotsByAge(age) {
+            const forYouBotsContainer = document.getElementById('for-you-bots');
+            const popularBotsContainer = document.getElementById('popular-bots');
+            let forYouBotsToDisplay = [];
+            let popularBotsToDisplay = [];
+            let forYouSectionTitle = '';
+            let popularSectionTitle = '';
+
+            if (age >= 5 && age <= 12) {
+                forYouBotsToDisplay = cartoonBots;
+                popularBotsToDisplay = popularCartoonBots;
+                forYouSectionTitle = 'Cartoon Characters For You';
+                popularSectionTitle = 'Popular Cartoon Characters';
+            } else if (age > 12 && age <= 20) {
+                forYouBotsToDisplay = animeBots;
+                popularBotsToDisplay = popularAnimeBots;
+                forYouSectionTitle = 'Anime Characters For You';
+                popularSectionTitle = 'Popular Anime Characters';
+            } else if (age > 20) {
+                forYouBotsToDisplay = bollywoodBots;
+                popularBotsToDisplay = popularBollywoodBots;
+                forYouSectionTitle = 'Bollywood Characters For You';
+                popularSectionTitle = 'Popular Bollywood Characters';
+            } else {
+                forYouSectionTitle = 'Recommended Characters';
+                popularSectionTitle = 'Trending Bots';
+                forYouBotsToDisplay = [...cartoonBots, ...animeBots, ...bollywoodBots].sort(() => 0.5 - Math.random()).slice(0, 4);
+                popularBotsToDisplay = [...popularCartoonBots, ...popularAnimeBots, ...popularBollywoodBots].sort(() => 0.5 - Math.random()).slice(0, 2);
+            }
+
+            document.querySelector('#for-you-section h3').textContent = forYouSectionTitle;
+            forYouBotsContainer.innerHTML = forYouBotsToDisplay.map(renderBotCard).join('');
+
+            document.querySelector('#popular-section h3').textContent = popularSectionTitle;
+            popularBotsContainer.innerHTML = popularBotsToDisplay.map(renderBotCard).join('');
+
+            document.querySelectorAll('.bot-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const botName = card.querySelector('h3').textContent;
+                    alert(`You clicked on ${botName}! This would open a chat interface for this bot.`);
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const createNewBotBtn = document.getElementById('create-new-bot-btn');
+            if (createNewBotBtn) {
+                createNewBotBtn.addEventListener('click', () => {
+                    window.location.href = 'create_bot_page.html';
+                });
+            }
+
+            const ageParam = getQueryParam('age');
+            if (ageParam) {
+                userAge = parseInt(ageParam);
+            }
+            displayBotsByAge(userAge);
+        });
+    </script>
+</body>
+</html>
