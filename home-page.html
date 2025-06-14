@@ -99,92 +99,145 @@
         </nav>
 
         <div class="flex flex-1 overflow-hidden">
-            <aside class="w-64 flex-shrink-0 bg-gray-800 p-6 flex flex-col justify-between text-white custom-scrollbar overflow-y-auto border-r border-gray-700">
+            <aside class="w-48 flex-shrink-0 bg-gray-800 p-4 flex flex-col justify-between text-white custom-scrollbar overflow-y-auto border-r border-gray-700">
                 <button id="create-new-bot-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300 text-base mb-8">
                     <i class="fas fa-plus-circle mr-2"></i> Create New Bot
                 </button>
 
                 <div class="flex-1 overflow-y-auto custom-scrollbar pr-2 mb-8">
                     <h4 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 text-purple-300">History</h4>
-                    <ul class="space-y-3">
+                    <ul id="history-list" class="space-y-3">
                         <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
                             <i class="fas fa-history mr-2 text-gray-400"></i> Math Class 1
                         </li>
                         <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
                             <i class="fas fa-history mr-2 text-gray-400"></i> Science Project
                         </li>
-                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> English Grammar
                         </li>
-                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> History Quiz Prep
                         </li>
-                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> Algebra Basics
                         </li>
-                         <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> Physics Laws
                         </li>
-                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> Literature Analysis
                         </li>
-                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> World Wars Overview
                         </li>
-                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> Geometry Concepts
                         </li>
-                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                        <li class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center hidden">
                             <i class="fas fa-history mr-2 text-gray-400"></i> Chemistry Elements
+                        </li>
+                    </ul>
+                    <button id="toggle-history-btn" class="mt-4 w-full bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-2 px-4 rounded-full text-sm">
+                        Show More
+                    </button>
+
+                    <h4 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 text-purple-300 mt-8">Content</h4>
+                    <ul class="space-y-3">
+                        <li id="video-content-btn" class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-video mr-2 text-gray-400"></i> Video Content
+                        </li>
+                        <li id="quizzes-btn" class="p-3 bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-600 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-question-circle mr-2 text-gray-400"></i> Quizzes
                         </li>
                     </ul>
                 </div>
 
-                <div class="flex flex-col items-center pt-8 border-t border-gray-700">
-                    <img src="https://placehold.co/80x80/6B46C1/FFFFFF/png?text=User" alt="User Profile" class="w-20 h-20 rounded-full object-cover border-4 border-purple-500 shadow-lg mb-4">
-                    <h3 class="text-xl font-semibold mb-1">Jane Doe</h3>
+                <div class="flex flex-col items-center py-4 border-t border-gray-700">
+                    <img src="https://placehold.co/80x80/6B46C1/FFFFFF/png?text=User" alt="User Profile" class="w-24 h-16 object-cover border-4 border-purple-500 shadow-lg mb-2">
+                    <h3 class="text-xl font-semibold mb-1">User</h3>
                     <p class="text-sm text-gray-400">Student</p>
                 </div>
             </aside>
 
             <main class="flex-1 bg-gray-900 p-6 text-white custom-scrollbar overflow-y-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-purple-300">Welcome back, Jane Doe!</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-purple-300">Welcome back, User!</h2>
                 
-                <section id="for-you-section" class="mb-10">
-                    <h3 class="text-2xl font-bold mb-6 text-purple-300">For You</h3>
-                    <div id="for-you-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
+                <section id="bot-sections-container">
+                    <section id="for-you-section" class="mb-10">
+                        <h3 class="text-2xl font-bold mb-6 text-purple-300">For You</h3>
+                        <div id="for-you-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
                         </div>
+                    </section>
+
+                    <section id="popular-section" class="mb-10">
+                        <h3 class="text-2xl font-bold mb-6 text-purple-300">Popular Bots</h3>
+                        <div id="popular-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
+                        </div>
+                    </section>
+
+                    <section id="recently-created-section" class="mb-10">
+                        <h3 class="text-2xl font-bold mb-6 text-purple-300">Recently Created</h3>
+                        <div id="recently-created-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
+                            <div class="bot-card border-green-600">
+                                <img src="https://placehold.co/100x100/32CD32/FFFFFF?text=My+Bot+1" alt="My Custom Bot 1" class="w-full h-24 mb-2">
+                                <h3 class="text-lg font-bold text-green-300">My Custom Bot 1</h3>
+                                <p class="text-gray-400 text-xs mb-3">Your first customized learning helper.</p>
+                                <div class="flex justify-between items-center text-gray-500 text-sm">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i> NEW!
+                                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-full text-xs">Chat</button>
+                                </div>
+                            </div>
+                            <div class="bot-card border-orange-600">
+                                <img src="https://placehold.co/100x100/FF8C00/FFFFFF?text=My+Bot+2" alt="My Custom Bot 2" class="w-full h-24 mb-2">
+                                <h3 class="text-lg font-bold text-orange-300">My Custom Bot 2</h3>
+                                <p class="text-gray-400 text-xs mb-3">Exploring history with a new perspective.</p>
+                                <div class="flex justify-between items-center text-gray-500 text-sm">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i> NEW!
+                                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-full text-xs">Chat</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </section>
 
-                <section id="popular-section" class="mb-10">
-                    <h3 class="text-2xl font-bold mb-6 text-purple-300">Popular Bots</h3>
-                    <div id="popular-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
+                <section id="video-content-display-section" class="hidden">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-300">Video Content Library</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                            <img src="https://placehold.co/300x180/4F46E5/FFFFFF?text=Math+Video" alt="Math Video" class="w-full h-auto rounded-md mb-3">
+                            <h4 class="text-lg font-semibold text-purple-200">Algebra Basics</h4>
+                            <p class="text-gray-400 text-sm">Introduction to fundamental algebraic concepts.</p>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                            <img src="https://placehold.co/300x180/22C55E/FFFFFF?text=Science+Video" alt="Science Video" class="w-full h-auto rounded-md mb-3">
+                            <h4 class="text-lg font-semibold text-green-200">The Water Cycle</h4>
+                            <p class="text-gray-400 text-sm">Understanding evaporation, condensation, precipitation.</p>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                            <img src="https://placehold.co/300x180/EF4444/FFFFFF?text=History+Video" alt="History Video" class="w-full h-auto rounded-md mb-3">
+                            <h4 class="text-lg font-semibold text-red-200">Ancient Civilizations</h4>
+                            <p class="text-gray-400 text-sm">Journey through the dawn of human history.</p>
+                        </div>
                     </div>
                 </section>
 
-                <section id="recently-created-section" class="mb-10">
-                    <h3 class="text-2xl font-bold mb-6 text-purple-300">Recently Created</h3>
-                    <div id="recently-created-bots" class="flex space-x-6 overflow-x-auto custom-scrollbar pb-4">
-                        <div class="bot-card border-green-600">
-                            <img src="https://placehold.co/100x100/32CD32/FFFFFF?text=My+Bot+1" alt="My Custom Bot 1" class="w-full h-24 mb-2">
-                            <h3 class="text-lg font-bold text-green-300">My Custom Bot 1</h3>
-                            <p class="text-gray-400 text-xs mb-3">Your first customized learning helper.</p>
-                            <div class="flex justify-between items-center text-gray-500 text-sm">
-                                <i class="fas fa-star text-yellow-400 mr-1"></i> NEW!
-                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-full text-xs">Chat</button>
-                            </div>
+                <section id="quizzes-display-section" class="hidden">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-300">Quizzes</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                            <h4 class="text-lg font-semibold text-purple-200">Math Quiz: Equations</h4>
+                            <p class="text-gray-400 text-sm mb-2">Test your knowledge on linear and quadratic equations.</p>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full text-sm">Start Quiz</button>
                         </div>
-                        <div class="bot-card border-orange-600">
-                            <img src="https://placehold.co/100x100/FF8C00/FFFFFF?text=My+Bot+2" alt="My Custom Bot 2" class="w-full h-24 mb-2">
-                            <h3 class="text-lg font-bold text-orange-300">My Custom Bot 2</h3>
-                            <p class="text-gray-400 text-xs mb-3">Exploring history with a new perspective.</p>
-                            <div class="flex justify-between items-center text-gray-500 text-sm">
-                                <i class="fas fa-star text-yellow-400 mr-1"></i> NEW!
-                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded-full text-xs">Chat</button>
-                            </div>
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                            <h4 class="text-lg font-semibold text-green-200">Science Quiz: Photosynthesis</h4>
+                            <p class="text-gray-400 text-sm mb-2">Evaluate your understanding of plant processes.</p>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-full text-sm">Start Quiz</button>
                         </div>
                     </div>
                 </section>
+
             </main>
         </div>
     </div>
@@ -430,13 +483,38 @@
             document.querySelectorAll('.bot-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const botName = card.querySelector('h3').textContent;
-                    alert(`You clicked on ${botName}! This would open a chat interface for this bot.`);
+                    window.location.href = `chatbot_page.html?botName=${encodeURIComponent(botName)}`;
                 });
             });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const createNewBotBtn = document.getElementById('create-new-bot-btn');
+            const historyList = document.getElementById('history-list');
+            const toggleHistoryBtn = document.getElementById('toggle-history-btn');
+            const historyItems = historyList.querySelectorAll('li');
+            const botSectionsContainer = document.getElementById('bot-sections-container');
+            const videoContentDisplaySection = document.getElementById('video-content-display-section');
+            const quizzesDisplaySection = document.getElementById('quizzes-display-section');
+            const videoContentBtn = document.getElementById('video-content-btn');
+            const quizzesBtn = document.getElementById('quizzes-btn');
+
+            let historyExpanded = false;
+
+            for (let i = 2; i < historyItems.length; i++) {
+                historyItems[i].classList.add('hidden');
+            }
+
+            if (toggleHistoryBtn) {
+                toggleHistoryBtn.addEventListener('click', () => {
+                    historyExpanded = !historyExpanded;
+                    for (let i = 2; i < historyItems.length; i++) {
+                        historyItems[i].classList.toggle('hidden', !historyExpanded);
+                    }
+                    toggleHistoryBtn.textContent = historyExpanded ? 'Show Less' : 'Show More';
+                });
+            }
+
             if (createNewBotBtn) {
                 createNewBotBtn.addEventListener('click', () => {
                     window.location.href = 'create_bot_page.html';
@@ -448,6 +526,30 @@
                 userAge = parseInt(ageParam);
             }
             displayBotsByAge(userAge);
+
+            function showContentSection(sectionToShow) {
+                botSectionsContainer.classList.add('hidden');
+                videoContentDisplaySection.classList.add('hidden');
+                quizzesDisplaySection.classList.add('hidden');
+
+                sectionToShow.classList.remove('hidden');
+            }
+
+            if (videoContentBtn) {
+                videoContentBtn.addEventListener('click', () => {
+                    showContentSection(videoContentDisplaySection);
+                });
+            }
+
+            if (quizzesBtn) {
+                quizzesBtn.addEventListener('click', () => {
+                    showContentSection(quizzesDisplaySection);
+                });
+            }
+
+            botSectionsContainer.classList.remove('hidden');
+            videoContentDisplaySection.classList.add('hidden');
+            quizzesDisplaySection.classList.add('hidden');
         });
     </script>
 </body>
