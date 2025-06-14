@@ -3,123 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shikshak Mitra - Your AI Learning Companion</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <title>Shikshak Mitra - Animated Intro</title>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            overflow: hidden;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            box-sizing: border-box;
+            position: relative;
         }
 
-        .video-background {
-            position: absolute;
+        #background-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            background-size: cover;
+            filter: brightness(60%);
+        }
+
+        .video-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background-color: rgba(26, 26, 46, 0.6);
             z-index: -1;
         }
 
-        .page {
+        h1.main-text, .container, .get-started-button {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1.main-text {
+            font-size: 5em;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+
+        h1.main-text span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            line-height: 1;
+        }
+
+       .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Reduced from 50px */
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 250px;
+}
+
+.feature-text {
+    position: absolute;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #FFFFFF;
+    opacity: 0;
+    text-align: center;
+    width: 600px;
+    left: 50%;
+    top: 45%; /* Moved up from 50% */
+    transform: translate(-50%, -50%) translateY(20px);
+    line-height: 1.4;
+}
+
+
+        .animated-square {
+            width: 120px;
+            height: 120px;
+            background-color: #00bcd4;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            left: 15%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        
+        .get-started-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            margin-top: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .get-started-button:hover {
+            background-color: #45a049;
+        }
+
+        /* New Bot Creation Styles */
+        .bot-creation-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #00bcd4;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+            width: 90%;
+            max-width: 600px;
             display: none;
-            height: 100%;
-            width: 100%;
+            z-index: 1000;
+        }
+
+        .bot-creation-form {
+            display: flex;
             flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #00bcd4;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00bcd4;
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: white;
+            font-size: 1em;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        .bot-creation-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .bot-creation-btn {
+            background: linear-gradient(45deg, #00bcd4, #4CAF50);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .bot-creation-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #00bcd4;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .bot-preview {
+            width: 100px;
+            height: 100px;
+            background: #1a1a2e;
+            border: 2px solid #00bcd4;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 1.5rem;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 0.75rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            animation: fadeIn 1s ease-out forwards;
-            position: relative;
-        }
-
-
-        #landing-page {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 12px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #2a2a2a;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #8b5cf6;
-            border-radius: 10px;
-            border: 3px solid #2a2a2a;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background-color: #a78bfa;
+            font-size: 2em;
+            color: #00bcd4;
         }
     </style>
 </head>
-<body class="bg-gray-900">
+<body>
 
+    <div class="video-overlay"></div>
+    <video autoplay muted loop id="background-video">
+        <source src="hi tech global connection lines background 4k H4RDJ9P.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-<div class="relative w-full h-screen flex items-center justify-center p-4">
+    <h1 class="main-text">Welcome to Shikshak Mitra</h1>
 
-    <div class="relative w-full h-full bg-black bg-opacity-40 backdrop-blur-sm rounded-2xl flex flex-col items-center overflow-hidden custom-scrollbar">
-
-        <nav class="w-full py-4 px-6 bg-gradient-to-r from-purple-700 to-indigo-700 rounded-t-2xl shadow-lg flex justify-start items-center flex-shrink-0">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white pl-4">Shikshak मित्र</h2>
-        </nav>
-
-        <div id="landing-page" class="page text-white flex-1 flex flex-col justify-center items-center px-6 pb-6">
-            <img src="Screenshot 2025-06-14 144544.png" alt="Shikshak Mitra Logo" style="width: 200px; height: 200px; border-radius: 50%; border-color: antiquewhite; border: white;">
-
-            <p class="text-xl md:text-3xl mb-8 leading-relaxed font-semibold">
-                Your AI Learning Companion for Personalized Pathways in Regional Languages
-            </p>
-            <ul class="text-lg md:text-xl text-left space-y-3 mb-10 list-disc list-inside">
-                <li><b><i class="fas fa-comments text-purple-300 mr-2"></i><i>Instant Answers</i></b> : Chat in your preferred regional language.</li>
-                <li><b><i class="fas fa-route text-purple-300 mr-2"></i><i>Personalized Paths</i></b> : AI-powered learning tailored just for you.</li>
-                <li><b><i class="fas fa-video text-purple-300 mr-2"></i><i>Rich Video Content</i></b> : Experience library of educational videos.</li>
-                <li><b><i class="fas fa-clipboard-check text-purple-300 mr-2"></i><i>Mastery Quizzes</i></b> : Test your knowledge and track progress.</li>
-            </ul>
-            <button id="get-started-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300 flex-shrink-0">
-                Get Started Now!
-            </button>
-        </div>
-
+    <div class="container">
+        <div class="animated-square"></div>
+        <p class="feature-text"></p>
     </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const landingPage = document.getElementById('landing-page');
-        if (landingPage) {
-            landingPage.style.display = 'flex';
-        }
+    <button class="get-started-button">Get Started</button>
 
-        const getStartedBtn = document.getElementById('get-started-btn');
-        if (getStartedBtn) {
-            getStartedBtn.addEventListener('click', () => {
-                alert('Get Started Now! button clicked! This would typically navigate to the user type selection or main content page.');
+    <div class="bot-creation-container" id="botCreationContainer">
+        <button class="close-btn" onclick="toggleBotCreation()">×</button>
+        <div class="bot-preview">🤖</div>
+        <form class="bot-creation-form" id="botCreationForm">
+            <div class="form-group">
+                <label for="botName">Bot Name</label>
+                <input type="text" id="botName" required placeholder="Enter bot name">
+            </div>
+            <div class="form-group">
+                <label for="botPersonality">Personality Type</label>
+                <select id="botPersonality" required>
+                    <option value="">Select personality</option>
+                    <option value="friendly">Friendly & Supportive</option>
+                    <option value="professional">Professional & Formal</option>
+                    <option value="humorous">Humorous & Playful</option>
+                    <option value="mentor">Mentor & Guide</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="botSpecialization">Specialization</label>
+                <select id="botSpecialization" required>
+                    <option value="">Select specialization</option>
+                    <option value="math">Mathematics</option>
+                    <option value="science">Science</option>
+                    <option value="language">Languages</option>
+                    <option value="history">History</option>
+                    <option value="general">General Knowledge</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="botDescription">Description</label>
+                <textarea id="botDescription" rows="3" placeholder="Describe your bot's characteristics"></textarea>
+            </div>
+            <div class="bot-creation-buttons">
+                <button type="button" class="bot-creation-btn" onclick="createBot()">Create Bot</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script>
+        const mainTextElement = document.querySelector('.main-text');
+        mainTextElement.innerHTML = mainTextElement.textContent.split('').map(char => {
+            return char === ' ' ? '<span>&nbsp;</span>' : `<span>${char}</span>`;
+        }).join('');
+
+        const features = [
+            "Instant Answers : Chat in your preferred regional language.",
+            "Personalized Paths : AI-powered learning tailored just for you.",
+            "Rich Video Content : Experience library of educational videos.",
+            "Mastery Quizzes : Test your knowledge and track progress."
+        ];
+        let currentFeatureIndex = 0;
+        const featureTextElement = document.querySelector('.feature-text');
+
+        function animateFeatureTextIn(text) {
+            featureTextElement.textContent = text;
+            anime({
+                targets: featureTextElement,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 800,
+                easing: 'easeOutQuad'
             });
         }
-    });
-</script>
+
+        anime.set('.animated-square', {
+            translateX: '-100vw',
+            rotate: 0,
+            scale: 0
+        });
+
+        anime.set('.feature-text', {
+            opacity: 0,
+            translateY: 20
+        });
+
+        anime.set('.get-started-button', {
+            opacity: 0,
+            translateY: 20
+        });
+
+        const initialIntroTimeline = anime.timeline({
+            easing: 'easeOutExpo',
+            duration: 1000,
+            autoplay: false,
+            complete: function() {
+                startContinuousAnimationLoop();
+            }
+        });
+
+        initialIntroTimeline.add({
+            targets: '.main-text span',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            rotate: [15, 0],
+            easing: 'easeOutBack',
+            duration: 800,
+            delay: anime.stagger(70, { start: 200 }),
+        })
+        .add({
+            targets: '.get-started-button',
+            opacity: [0, 1],
+            translateY: [20, 0],
+            easing: 'easeOutQuad',
+            duration: 1000
+        }, '-=500')
+        .add({
+            targets: '.animated-square',
+            translateX: {
+                value: 0,
+                duration: 1200
+            },
+            scale: {
+                value: 1,
+                duration: 800,
+                delay: 200
+            },
+            borderRadius: ['0%', '15%'],
+            backgroundColor: ['#ff9800', '#00bcd4'],
+            easing: 'easeOutQuad'
+        }, '-=1000');
+
+        function startContinuousAnimationLoop() {
+            animateFeatureTextIn(features[currentFeatureIndex]);
+
+            anime({
+                targets: '.animated-square',
+                rotate: '1turn',
+                backgroundColor: [
+                    { value: '#ff9800', duration: 1250 },
+                    { value: '#00bcd4', duration: 1250 }
+                ],
+                scale: [
+                    { value: 1.1, duration: 1250 },
+                    { value: 1.0, duration: 1250 }
+                ],
+                easing: 'easeInOutQuad',
+                duration: 2500,
+                loop: true
+            });
+
+            setInterval(() => {
+                animateFeatureTextIn(features[currentFeatureIndex]);
+                currentFeatureIndex = (currentFeatureIndex + 1) % features.length;
+            }, 2500);
+        }
+
+        initialIntroTimeline.play();
+
+        document.querySelector('.get-started-button').addEventListener('click', () => {
+    window.location.href = 'get-started.html';
+});
+
+        // Add new bot creation functionality
+        function toggleBotCreation() {
+            const container = document.getElementById('botCreationContainer');
+            container.style.display = container.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function createBot() {
+            const botName = document.getElementById('botName').value;
+            const personality = document.getElementById('botPersonality').value;
+            const specialization = document.getElementById('botSpecialization').value;
+            const description = document.getElementById('botDescription').value;
+
+            if (!botName || !personality || !specialization) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Create bot preview animation
+            anime({
+                targets: '.bot-preview',
+                scale: [1, 1.2, 1],
+                rotate: '1turn',
+                duration: 1000,
+                easing: 'easeInOutQuad',
+                complete: function() {
+                    alert(`Bot "${botName}" created successfully!`);
+                    toggleBotCreation();
+                    // Reset form
+                    document.getElementById('botCreationForm').reset();
+                }
+            });
+        }
+
+        // Add click handler to Get Started button
+        document.querySelector('.get-started-button').addEventListener('click', function() {
+            toggleBotCreation();
+        });
+    </script>
 </body>
 </html>

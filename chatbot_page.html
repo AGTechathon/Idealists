@@ -1,172 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shikshak Mitra - Chat</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #1a202c;
-        }
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-        .chat-container {
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 0;
-            background-color: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
-            border-radius: 0;
-            padding: 0;
-            box-shadow: none;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voice ChatBot</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+    }
 
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #2a2a2a;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #8b5cf6;
-            border-radius: 10px;
-            border: 2px solid #2a2a2a;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background-color: #a78bfa;
-        }
-    </style>
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #000;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    #callBtn {
+      background-color: #222;
+      border: 1px solid #555;
+      padding: 10px;
+      border-radius: 5px;
+      color: #0f0;
+      cursor: pointer;
+    }
+
+    #chatbox {
+      height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .message {
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+
+    .user {
+      background-color: #333;
+      text-align: right;
+    }
+
+    .bot {
+      background-color: #444;
+      text-align: left;
+    }
+
+    .input-area {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #222;
+      color: #fff;
+    }
+
+    .input-area button {
+      margin-left: 10px;
+      padding: 10px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #micBtn {
+      font-size: 18px;
+    }
+  </style>
 </head>
-<body class="bg-gray-900">
-    <video autoPlay loop muted class="video-background" src="https://assets.mixkit.co/videos/preview/mixkit-hi-tech-global-connection-lines-background-4k-4886.mp4">
-        Your browser does not support the video tag.
-    </video>
+<body>
+  <div class="container">
+    <header>
+      <h1>AI Voice ChatBot</h1>
+      <button id="callBtn">📞 Call</button>
+    </header>
 
-    <div class="chat-container">
-        <nav class="w-full py-4 px-6 bg-gradient-to-r from-purple-700 to-indigo-700 shadow-lg flex justify-between items-center flex-shrink-0">
-            <button id="back-to-home-btn" class="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-full shadow-md transition-colors duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-            </button>
-            <h2 id="bot-name-display" class="text-3xl md:text-4xl font-extrabold text-white text-center flex-1"></h2>
-            <div class="w-10"></div>
-        </nav>
-
-        <div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar" id="chat-messages">
-            <div class="text-center text-gray-500 mt-10 text-lg">
-                Start chatting with <span id="initial-bot-name"></span>!
-            </div>
-        </div>
-
-        <div class="p-4 bg-gray-800 border-t border-gray-700 flex items-center">
-            <button id="voice-call-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300 text-lg mr-4">
-                <i class="fas fa-phone mr-2"></i> Voice Call
-            </button>
-            <input
-                type="text"
-                id="chat-input"
-                placeholder="Type your message..."
-                class="flex-1 p-3 rounded-full bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            >
-            <button
-                id="send-text-btn"
-                class="ml-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-purple-300"
-            >
-                Send
-            </button>
-            <button id="send-audio-btn" class="ml-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                <i class="fas fa-microphone mr-2"></i> Send Audio
-            </button>
-        </div>
+    <div id="chatbox">
+      <div class="message bot">👋 Hi! I'm your assistant. Ask me anything.</div>
     </div>
 
-    <script>
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+    <div class="input-area">
+      <button id="micBtn">🎙️</button>
+      <input type="text" id="userInput" placeholder="Type or speak..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const botNameDisplay = document.getElementById('bot-name-display');
-            const initialBotNameSpan = document.getElementById('initial-bot-name');
-            const chatInput = document.getElementById('chat-input');
-            const sendTextBtn = document.getElementById('send-text-btn');
-            const chatMessagesDiv = document.getElementById('chat-messages');
-            const backToHomeBtn = document.getElementById('back-to-home-btn');
-            const voiceCallBtn = document.getElementById('voice-call-btn');
-            const sendAudioBtn = document.getElementById('send-audio-btn');
+  <script>
+    const chatbox = document.getElementById("chatbox");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const micBtn = document.getElementById("micBtn");
+    const callBtn = document.getElementById("callBtn");
 
-            const selectedBotName = getQueryParam('botName') || 'Your Bot';
-            botNameDisplay.textContent = selectedBotName;
-            initialBotNameSpan.textContent = selectedBotName;
+    function addMessage(text, sender = "bot") {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.innerText = text;
+      chatbox.appendChild(msg);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
 
-            let chatHistory = [];
+    sendBtn.onclick = () => {
+      const text = userInput.value.trim();
+      if (text) {
+        addMessage(text, "user");
+        userInput.value = "";
+        respondToMessage(text);
+      }
+    };
 
-            function appendMessage(role, text) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('flex', role === 'user' ? 'justify-end' : 'justify-start');
-                
-                const bubble = document.createElement('div');
-                bubble.classList.add('p-3', 'rounded-lg', 'max-w-lg', 'shadow-md');
-                if (role === 'user') {
-                    bubble.classList.add('bg-blue-600', 'text-white', 'rounded-br-none');
-                } else {
-                    bubble.classList.add('bg-gray-700', 'text-gray-100', 'rounded-bl-none');
-                }
-                bubble.textContent = text;
-                messageElement.appendChild(bubble);
-                chatMessagesDiv.appendChild(messageElement);
-                chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
-            }
+    function respondToMessage(input) {
+      setTimeout(() => {
+        addMessage("🤖 You said: " + input, "bot");
+      }, 500);
+    }
 
-            sendTextBtn.addEventListener('click', () => {
-                const message = chatInput.value.trim();
-                if (message) {
-                    appendMessage('user', message);
-                    chatInput.value = '';
-                    setTimeout(() => {
-                        appendMessage('bot', `This is a response from ${selectedBotName} about: "${message}"`);
-                    }, 500);
-                }
-            });
+    // 🎙️ Speech Recognition
+    let recognition;
+    if ('webkitSpeechRecognition' in window) {
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "en-US";
 
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendTextBtn.click();
-                }
-            });
+      recognition.onresult = function (event) {
+        const speechResult = event.results[0][0].transcript;
+        userInput.value = speechResult;
+        addMessage(speechResult, "user");
+        respondToMessage(speechResult);
+      };
 
-            backToHomeBtn.addEventListener('click', () => {
-                alert('Going back to the Home Page!');
-                window.location.href = 'home-page.html'; 
-            });
+      recognition.onerror = function (event) {
+        console.error("Speech recognition error", event);
+      };
+    }
 
-            voiceCallBtn.addEventListener('click', () => {
-                alert(`Initiating voice call with ${selectedBotName}... (This is a simulation)`);
-            });
+    micBtn.onclick = () => {
+      if (recognition) {
+        recognition.start();
+      } else {
+        alert("Speech Recognition not supported in this browser.");
+      }
+    };
 
-            sendAudioBtn.addEventListener('click', () => {
-                alert(`Recording and sending audio to ${selectedBotName}... (This is a simulation)`);
-            });
-        });
-    </script>
+    // 📞 Placeholder for voice call
+    callBtn.onclick = () => {
+      alert("Voice call feature not implemented. Use Agora/WebRTC SDK to enable it.");
+    };
+  </script>
 </body>
 </html>

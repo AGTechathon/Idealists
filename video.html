@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Videos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+
+        .container {
+            background-color: #000000; /* Darker container background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 1200px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #4a4a6a;
+            padding-bottom: 15px;
+        }
+
+        header .back-arrow {
+            color: #8c52ff;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        header .title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        header .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        header .actions button {
+            background-color: #2a2a2b;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        header .actions button:hover {
+            background-color: #353536;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #c0c0c0;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #4a4a6a;
+            background-color: #3a3a5a;
+            color: #e0e0e0;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        select:focus, button:focus {
+            outline: none;
+            border-color: #393939;
+        }
+
+        button {
+            background-color: #383838;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #6a3ab8;
+        }
+
+        .video-player {
+            margin-top: 40px;
+            background-color: #3a3a5a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 250px; /* To ensure some height even without video */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-player h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .video-player p {
+            color: #c0c0c0;
+            margin-bottom: 20px;
+        }
+
+        .video-player .video-embed {
+            width: 100%;
+            max-width: 600px;
+            height: 350px; /* Adjust height as needed */
+            background-color: #1a1a2e; /* Placeholder background for video */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden; /* To prevent overflow if content is larger */
+        }
+
+        .video-player .video-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-unavailable {
+            color: #ff6b6b; /* Red color for unavailable message */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-arrow">&leftarrow;</a>
+            <span class="title" id="subjectTitle">Subject Videos</span>
+            <div class="actions">
+                <span>Language: Hindi</span>
+            </div>
+        </header>
+
+        <h1 id="videosForSubject">Videos for History</h1>
+
+        <div class="form-group">
+            <label for="languageSelect">Select Language for Videos:</label>
+            <select id="languageSelect">
+                <option value="">Choose a language</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Marathi">Marathi</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Kannada">Kannada</option>
+            </select>
+            <button onclick="showVideo()">Show Video</button>
+        </div>
+
+        <div class="video-player" id="videoPlayer">
+            <div class="video-embed">
+                <p class="video-unavailable">Video unavailable</p>
+                <p>This video is unavailable</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data structure to hold video information
+        const videoData = {
+            "Mathematics": {
+                "English": {
+                    title: "Introduction to Algebra",
+                    description: "Learn the basics of algebra, including variables, expressions, and equations.",
+                    url: "https://www.youtube.com/embed/i02iW_p1M3A" // Example YouTube embed URL
+                },
+                "Hindi": {
+                    title: "बीजगणित का परिचय",
+                    description: "चर, व्यंजक और समीकरण सहित बीजगणित की मूल बातें जानें।",
+                    url: "https://www.youtube.com/embed/someHindiMathsVideo" // Placeholder
+                }
+                // Add more languages/videos as needed
+            },
+            "Science": {
+                "English": {
+                    title: "The Water Cycle",
+                    description: "Understand the continuous movement of water on, above, and below the surface of the Earth.",
+                    url: "https://www.youtube.com/embed/someEnglishScienceVideo" // Placeholder
+                },
+                "Hindi": {
+                    title: "जल चक्र",
+                    description: "पृथ्वी की सतह पर, ऊपर और नीचे पानी की निरंतर गति को समझें।",
+                    url: "https://www.youtube.com/embed/someHindiScienceVideo" // Placeholder
+                }
+            },
+            "History": {
+                "English": {
+                    title: "Ancient Egypt: Rise of a Civilization",
+                    description: "Explore the mysteries of ancient Egypt, its pharaohs, pyramids, and enduring legacy.",
+                    url: "https://www.youtube.com/embed/someEnglishHistoryVideo" // Placeholder, replace with actual YouTube embed URL
+                },
+                "Hindi": {
+                    title: "प्राचीन मिस्र: एक सभ्यता का उदय",
+                    description: "प्राचीन मिस्र के चमत्कारों, उसके फिरौन, पिरामिडों और स्थायी विरासत को खोजें।",
+                    url: "https://www.youtube.com/embed/someHindiHistoryVideo" // Placeholder, replace with actual YouTube embed URL
+                }
+            },
+            "English": {
+                "English": {
+                    title: "Grammar Basics: Parts of Speech",
+                    description: "A foundational lesson on the eight parts of speech in English.",
+                    url: "https://www.youtube.com/embed/someEnglishEnglishVideo" // Placeholder
+                },
+                "Hindi": {
+                    title: "व्याकरण की मूल बातें: भाषण के भाग",
+                    description: "अंग्रेजी में भाषण के आठ भागों पर एक मूलभूत पाठ।",
+                    url: "https://www.youtube.com/embed/someHindiEnglishVideo" // Placeholder
+                }
+            }
+        };
+
+        let currentSubject = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentSubject = urlParams.get('subject');
+
+            if (currentSubject) {
+                document.getElementById('videosForSubject').textContent = `Videos for ${currentSubject}`;
+                document.getElementById('subjectTitle').textContent = `Subject Videos - ${currentSubject}`;
+            } else {
+                document.getElementById('videosForSubject').textContent = 'Videos for Selected Subject';
+            }
+        });
+
+        function showVideo() {
+            const language = document.getElementById('languageSelect').value;
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.innerHTML = ''; // Clear previous content
+
+            if (!currentSubject || !language) {
+                videoPlayer.innerHTML = `
+                    <div class="video-embed">
+                        <p class="video-unavailable">Please select both a subject (from previous page) and a language.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const subjectVideos = videoData[currentSubject];
+
+            if (subjectVideos && subjectVideos[language]) {
+                const video = subjectVideos[language];
+                videoPlayer.innerHTML = `
+                    <h3>${video.title}</h3>
+                    <p>${video.description}</p>
+                    <div class="video-embed">
+                        <iframe src="${video.url}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                `;
+            } else {
+                videoPlayer.innerHTML = `
+                    <div class="video-embed">
+                        <p class="video-unavailable">Video unavailable</p>
+                        <p>This video is unavailable for ${currentSubject} in ${language}.</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

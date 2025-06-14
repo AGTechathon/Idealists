@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Shikshak Mitra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a2e; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+
+        .container {
+            background-color: #2a2a4a; /* Darker container background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #4a4a6a;
+            padding-bottom: 15px;
+        }
+
+        header .back-arrow {
+            color: #8c52ff;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        header .title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        header .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        header .actions button {
+            background-color: #8c52ff;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        header .actions button:hover {
+            background-color: #6a3ab8;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .level-selection {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .level-selection h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .level-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .level-buttons button {
+            background-color: #8c52ff;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .level-buttons button:hover {
+            background-color: #6a3ab8;
+        }
+
+        .quiz-area {
+            background-color: #3a3a5a;
+            border-radius: 8px;
+            padding: 30px;
+            display: none; /* Hidden by default, shown when a level is selected */
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-area h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            color: #c0c0c0;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.4em;
+            color: #fff;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .option-button {
+            background-color: #4a4a6a;
+            color: #e0e0e0;
+            border: 1px solid #5a5a7a;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .option-button:hover {
+            background-color: #5a5a7a;
+            border-color: #8c52ff;
+        }
+
+        .option-button.correct {
+            background-color: #4CAF50; /* Green */
+            border-color: #4CAF50;
+            color: white;
+        }
+
+        .option-button.incorrect {
+            background-color: #f44336; /* Red */
+            border-color: #f44336;
+            color: white;
+        }
+
+        .next-button {
+            background-color: #8c52ff;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 30px;
+            display: none; /* Hidden until an answer is selected */
+            transition: background-color 0.3s ease;
+        }
+
+        .next-button:hover {
+            background-color: #6a3ab8;
+        }
+
+        .result-area {
+            text-align: center;
+            margin-top: 30px;
+            display: none; /* Hidden initially */
+        }
+
+        .result-area h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .result-area p {
+            font-size: 1.2em;
+            color: #c0c0c0;
+        }
+
+        .result-area .score {
+            font-size: 2em;
+            font-weight: 600;
+            color: #8c52ff;
+            margin-top: 10px;
+        }
+
+        .result-area button {
+            background-color: #8c52ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .result-area button:hover {
+            background-color: #6a3ab8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-arrow">&leftarrow;</a>
+            <span class="title" id="quizSubjectTitle">Quiz</span>
+            <div class="actions">
+                <span>Language: Hindi</span>
+                <button>Chatbot</button>
+            </div>
+        </header>
+
+        <h1 id="quizPageTitle">Quiz for Subject</h1>
+
+        <div class="level-selection" id="levelSelection">
+            <h2>Select a Level</h2>
+            <div class="level-buttons">
+                <button onclick="startQuizLevel(1)">Level 1 (Easy)</button>
+                <button onclick="startQuizLevel(2)">Level 2 (Medium)</button>
+                <button onclick="startQuizLevel(3)">Level 3 (Hard)</button>
+            </div>
+        </div>
+
+        <div class="quiz-area" id="quizArea">
+            <p class="question-number">Question <span id="currentQuestionNumber">1</span> of 10</p>
+            <p class="question-text" id="questionText">What is 2 + 2?</p>
+            <div class="options-container" id="optionsContainer">
+                <button class="option-button" onclick="checkAnswer(this, '4')">3</button>
+                <button class="option-button" onclick="checkAnswer(this, '4')">4</button>
+                <button class="option-button" onclick="checkAnswer(this, '4')">5</button>
+                <button class="option-button" onclick="checkAnswer(this, '4')">6</button>
+            </div>
+            <button class="next-button" id="nextQuestionBtn" onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <div class="result-area" id="resultArea">
+            <h2>Quiz Complete!</h2>
+            <p>You scored: <span class="score" id="finalScore">0</span> / <span id="totalQuestions">10</span></p>
+            <button onclick="window.location.reload()">Try Again</button>
+            <button onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSubject = '';
+        let currentLevel = 0;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let questions = []; // This will hold the questions for the current level
+
+        // Define your quiz questions here.
+        // Each subject has levels, and each level has an array of questions.
+        // Each question object should have:
+        // - question: The question text
+        // - options: An array of answer options
+        // - answer: The correct answer (must exactly match one of the options)
+        const quizData = {
+            "Mathematics": {
+                1: [ // Level 1 (Easy)
+                    { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], answer: "4" },
+                    { question: "What is 5 x 3?", options: ["8", "10", "15", "20"], answer: "15" },
+                    { question: "Which shape has 3 sides?", options: ["Square", "Circle", "Triangle", "Rectangle"], answer: "Triangle" },
+                    { question: "What is 10 - 7?", options: ["2", "3", "4", "5"], answer: "3" },
+                    { question: "How many sides does a pentagon have?", options: ["4", "5", "6", "7"], answer: "5" },
+                    { question: "What is 20 / 4?", options: ["3", "4", "5", "6"], answer: "5" },
+                    { question: "Which number comes after 9?", options: ["8", "10", "11", "12"], answer: "10" },
+                    { question: "What is the sum of 6 and 4?", options: ["9", "10", "11", "12"], answer: "10" },
+                    { question: "If you have 5 apples and eat 2, how many are left?", options: ["2", "3", "4", "5"], answer: "3" },
+                    { question: "What is the next number in the sequence: 1, 2, 3, 4, ...?", options: ["5", "6", "7", "8"], answer: "5" }
+                ],
+                2: [ // Level 2 (Medium)
+                    { question: "If x + 5 = 12, what is x?", options: ["5", "7", "10", "17"], answer: "7" },
+                    { question: "What is the area of a rectangle with length 8cm and width 5cm?", options: ["13 cm²", "30 cm²", "40 cm²", "50 cm²"], answer: "40 cm²" },
+                    { question: "What is the square root of 81?", options: ["7", "8", "9", "10"], answer: "9" },
+                    { question: "Convert 0.75 to a fraction.", options: ["1/2", "3/4", "4/5", "7/10"], answer: "3/4" },
+                    { question: "If a shirt costs $25 and is 20% off, what is the new price?", options: ["$20", "$15", "$18", "$22"], answer: "$20" },
+                    { question: "What is the value of Pi (π) to two decimal places?", options: ["3.12", "3.14", "3.16", "3.18"], answer: "3.14" },
+                    { question: "What type of angle is greater than 90 degrees but less than 180 degrees?", options: ["Acute", "Right", "Obtuse", "Straight"], answer: "Obtuse" },
+                    { question: "Simplify the expression: 3x + 2x - x", options: ["2x", "3x", "4x", "5x"], answer: "4x" },
+                    { question: "What is the perimeter of a square with a side length of 6cm?", options: ["12 cm", "24 cm", "36 cm", "48 cm"], answer: "24 cm" },
+                    { question: "What is the least common multiple (LCM) of 4 and 6?", options: ["12", "18", "24", "36"], answer: "12" }
+                ],
+                3: [ // Level 3 (Hard)
+                    { question: "What is the derivative of x²?", options: ["x", "2", "2x", "x³"], answer: "2x" },
+                    { question: "Solve for x: log₂(x) = 3", options: ["4", "6", "8", "16"], answer: "8" },
+                    { question: "What is the definite integral of 2x from 0 to 1?", options: ["0", "1", "2", "4"], answer: "1" },
+                    { question: "If the probability of event A is 0.5 and event B is 0.4, and they are independent, what is P(A and B)?", options: ["0.9", "0.2", "0.1", "0.7"], answer: "0.2" },
+                    { question: "What is the formula for the volume of a sphere?", options: ["πr²h", "(4/3)πr³", "2πr", "πr²"], answer: "(4/3)πr³" },
+                    { question: "What is the sum of the first 100 positive integers?", options: ["5000", "5050", "5100", "5200"], answer: "5050" },
+                    { question: "What is the reciprocal of 0.25?", options: ["4", "2", "0.5", "1"], answer: "4" },
+                    { question: "If a = 3 and b = 4, what is √(a² + b²)?", options: ["5", "7", "9", "25"], answer: "5" },
+                    { question: "Which of these is a prime number?", options: ["9", "15", "21", "23"], answer: "23" },
+                    { question: "What is the value of 5! (5 factorial)?", options: ["25", "50", "100", "120"], answer: "120" }
+                ]
+            },
+            "Science": {
+                1: [
+                    { question: "What gas do plants breathe in?", options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], answer: "Carbon Dioxide" },
+                    { question: "What is the main source of energy for Earth?", options: ["Moon", "Stars", "Sun", "Volcanoes"], answer: "Sun" },
+                    { question: "Which planet is known as the 'Red Planet'?", options: ["Earth", "Mars", "Jupiter", "Venus"], answer: "Mars" },
+                    { question: "What is the freezing point of water in Celsius?", options: ["0°C", "10°C", "32°C", "100°C"], answer: "0°C" },
+                    { question: "What force pulls things towards the Earth?", options: ["Friction", "Gravity", "Magnetism", "Tension"], answer: "Gravity" },
+                    { question: "Which part of a plant absorbs water?", options: ["Leaves", "Flowers", "Stem", "Roots"], answer: "Roots" },
+                    { question: "What is the largest organ in the human body?", options: ["Heart", "Brain", "Skin", "Liver"], answer: "Skin" },
+                    { question: "What is the process of a liquid turning into a gas?", options: ["Melting", "Freezing", "Condensation", "Evaporation"], answer: "Evaporation" },
+                    { question: "Which animal lays eggs?", options: ["Cat", "Dog", "Chicken", "Cow"], answer: "Chicken" },
+                    { question: "What do you call a scientist who studies stars and planets?", options: ["Biologist", "Chemist", "Astronomer", "Geologist"], answer: "Astronomer" }
+                ],
+                2: [
+                    { question: "What is the chemical symbol for water?", options: ["CO2", "O2", "H2O", "N2"], answer: "H2O" },
+                    { question: "Which of these is a conductor of electricity?", options: ["Wood", "Plastic", "Copper", "Glass"], answer: "Copper" },
+                    { question: "What is the powerhouse of the cell?", options: ["Nucleus", "Mitochondria", "Ribosome", "Cytoplasm"], answer: "Mitochondria" },
+                    { question: "What is the pH of a neutral solution?", options: ["0", "7", "14", "Between 0 and 7"], answer: "7" },
+                    { question: "Which gas makes up the majority of Earth's atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Argon", "Nitrogen"], answer: "Nitrogen" },
+                    { question: "What is the process by which plants make their own food?", options: ["Respiration", "Transpiration", "Photosynthesis", "Germination"], answer: "Photosynthesis" },
+                    { question: "Which layer of the Earth is liquid?", options: ["Crust", "Mantle", "Outer Core", "Inner Core"], answer: "Outer Core" },
+                    { question: "What type of rock is formed from cooled magma or lava?", options: ["Sedimentary", "Metamorphic", "Igneous", "Composite"], answer: "Igneous" },
+                    { question: "Which of the following is an example of a renewable energy source?", options: ["Coal", "Natural Gas", "Solar Power", "Nuclear Power"], answer: "Solar Power" },
+                    { question: "What is the unit of force?", options: ["Joule", "Watt", "Newton", "Volt"], answer: "Newton" }
+                ],
+                3: [
+                    { question: "What is the primary function of red blood cells?", options: ["Fighting infection", "Clotting blood", "Carrying oxygen", "Producing antibodies"], answer: "Carrying oxygen" },
+                    { question: "Which phenomenon is responsible for the splitting of white light into its constituent colors when it passes through a prism?", options: ["Reflection", "Refraction", "Diffraction", "Dispersion"], answer: "Dispersion" },
+                    { question: "What is the most abundant element in the Earth's crust?", options: ["Silicon", "Aluminum", "Iron", "Oxygen"], answer: "Oxygen" },
+                    { question: "Which hormone is responsible for regulating blood sugar levels?", options: ["Estrogen", "Testosterone", "Insulin", "Adrenaline"], answer: "Insulin" },
+                    { question: "In physics, what does 'E=mc²' represent?", options: ["Energy-mass equivalence", "Electrical potential", "Electromagnetic spectrum", "Einstein's constant"], answer: "Energy-mass equivalence" },
+                    { question: "What is the largest known galaxy?", options: ["Andromeda", "Triangulum", "Milky Way", "IC 1101"], answer: "IC 1101" },
+                    { question: "What type of reaction combines smaller atoms to form a larger atom, releasing enormous energy?", options: ["Fission", "Fusion", "Oxidation", "Reduction"], answer: "Fusion" },
+                    { question: "Which planet is known for its prominent ring system?", options: ["Jupiter", "Uranus", "Neptune", "Saturn"], answer: "Saturn" },
+                    { question: "What is the name of the process by which a solid turns directly into a gas without becoming a liquid?", options: ["Melting", "Evaporation", "Sublimation", "Condensation"], answer: "Sublimation" },
+                    { question: "What is the smallest unit of matter that retains an element's chemical identity?", options: ["Molecule", "Proton", "Neutron", "Atom"], answer: "Atom" }
+                ]
+            },
+            "History": {
+                1: [
+                    { question: "Who was the first President of the United States?", options: ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "John Adams"], answer: "George Washington" },
+                    { question: "Which ancient civilization built the pyramids?", options: ["Romans", "Greeks", "Egyptians", "Mayans"], answer: "Egyptians" },
+                    { question: "What year did World War I begin?", options: ["1904", "1914", "1924", "1934"], answer: "1914" },
+                    { question: "Who wrote the 'Declaration of Independence'?", options: ["Benjamin Franklin", "George Washington", "Thomas Jefferson", "John Hancock"], answer: "Thomas Jefferson" },
+                    { question: "Which famous wall was built in China?", options: ["Great Wall", "Berlin Wall", "Hadrian's Wall", "Wailing Wall"], answer: "Great Wall" },
+                    { question: "Who discovered America in 1492?", options: ["Vasco da Gama", "Ferdinand Magellan", "Christopher Columbus", "Marco Polo"], answer: "Christopher Columbus" },
+                    { question: "What was the capital of the Roman Empire?", options: ["Athens", "Sparta", "Rome", "Cairo"], answer: "Rome" },
+                    { question: "Who was the leader of the Soviet Union during World War II?", options: ["Lenin", "Trotsky", "Stalin", "Gorbachev"], answer: "Stalin" },
+                    { question: "The Renaissance originated in which country?", options: ["France", "England", "Italy", "Germany"], answer: "Italy" },
+                    { question: "What event marked the start of the Great Depression?", options: ["Pearl Harbor Attack", "Stock Market Crash of 1929", "End of World War I", "New Deal Legislation"], answer: "Stock Market Crash of 1929" }
+                ],
+                2: [
+                    { question: "The Magna Carta was signed in which year?", options: ["1066", "1215", "1492", "1776"], answer: "1215" },
+                    { question: "Which empire was ruled by Alexander the Great?", options: ["Roman Empire", "Persian Empire", "Greek Empire", "Macedonian Empire"], answer: "Macedonian Empire" },
+                    { question: "What was the primary cause of the Opium Wars?", options: ["Territorial disputes", "Trade imbalances", "Religious conflicts", "Slavery"], answer: "Trade imbalances" },
+                    { question: "Who was Joan of Arc?", options: ["A French queen", "An English spy", "A French peasant girl and military leader", "A Roman empress"], answer: "A French peasant girl and military leader" },
+                    { question: "The Black Death was a pandemic of which disease?", options: ["Smallpox", "Typhoid", "Bubonic Plague", "Influenza"], answer: "Bubonic Plague" },
+                    { question: "Which city was divided by a famous wall from 1961 to 1989?", options: ["Paris", "London", "Berlin", "Vienna"], answer: "Berlin" },
+                    { question: "Who led the Bolshevik Revolution in Russia?", options: ["Stalin", "Kerensky", "Lenin", "Trotsky"], answer: "Lenin" },
+                    { question: "The ancient city of Troy was located in which modern-day country?", options: ["Greece", "Italy", "Turkey", "Egypt"], answer: "Turkey" },
+                    { question: "Which American president was assassinated in 1865?", options: ["Andrew Jackson", "Abraham Lincoln", "Ulysses S. Grant", "James A. Garfield"], answer: "Abraham Lincoln" },
+                    { question: "What was the main purpose of the Berlin Conference of 1884?", options: ["To discuss world peace", "To divide Africa among European powers", "To establish trade routes", "To end slavery"], answer: "To divide Africa among European powers" }
+                ],
+                3: [
+                    { question: "Which historical figure is credited with inventing the printing press?", options: ["Leonardo da Vinci", "Johannes Gutenberg", "Isaac Newton", "Galileo Galilei"], answer: "Johannes Gutenberg" },
+                    { question: "The Battle of Hastings in 1066 led to the Norman conquest of which country?", options: ["France", "Spain", "England", "Germany"], answer: "England" },
+                    { question: "What was the primary goal of the Crusades?", options: ["To establish new trade routes", "To reclaim the Holy Land from Muslim rule", "To explore new territories", "To spread democracy"], answer: "To reclaim the Holy Land from Muslim rule" },
+                    { question: "Who was the last pharaoh of ancient Egypt?", options: ["Hatshepsut", "Nefertiti", "Cleopatra VII", "Tutankhamun"], answer: "Cleopatra VII" },
+                    { question: "The Treaty of Versailles formally ended which war?", options: ["American Civil War", "Franco-Prussian War", "World War I", "World War II"], answer: "World War I" },
+                    { question: "What was the 'Silk Road' primarily used for?", options: ["Military transport", "Religious pilgrimages", "Trade between East and West", "Scientific exploration"], answer: "Trade between East and West" },
+                    { question: "Which ancient civilization developed the concept of zero?", options: ["Greeks", "Romans", "Indians", "Chinese"], answer: "Indians" },
+                    { question: "Who was the primary author of 'The Communist Manifesto'?", options: ["Friedrich Engels", "Vladimir Lenin", "Karl Marx", "Leon Trotsky"], answer: "Karl Marx" },
+                    { question: "The 'Reign of Terror' was a period during which revolution?", options: ["American Revolution", "Russian Revolution", "French Revolution", "Glorious Revolution"], answer: "French Revolution" },
+                    { question: "What was the purpose of the Manhattan Project?", options: ["To develop the first nuclear submarine", "To build the first atomic bomb", "To create a powerful computer", "To send a man to the moon"], answer: "To build the first atomic bomb" }
+                ]
+            },
+            "English": {
+                1: [
+                    { question: "Which of these is a noun?", options: ["Run", "Happy", "Table", "Quickly"], answer: "Table" },
+                    { question: "What is the past tense of 'go'?", options: ["Goes", "Gone", "Went", "Going"], answer: "Went" },
+                    { question: "Which word means the opposite of 'big'?", options: ["Large", "Small", "Huge", "Giant"], answer: "Small" },
+                    { question: "Identify the verb in the sentence: 'The bird sings beautifully.'", options: ["The", "bird", "sings", "beautifully"], answer: "sings" },
+                    { question: "Which punctuation mark ends a question?", options: [".", "!", "?", ","], answer: "?" },
+                    { question: "What is a group of lions called?", options: ["Pack", "Herd", "Pride", "Flock"], answer: "Pride" },
+                    { question: "Which word is a synonym for 'happy'?", options: ["Sad", "Joyful", "Angry", "Tired"], answer: "Joyful" },
+                    { question: "Complete the sentence: 'She ___ to the store yesterday.'", options: ["goes", "going", "went", "go"], answer: "went" },
+                    { question: "Which of these is a pronoun?", options: ["Jump", "Blue", "He", "Quick"], answer: "He" },
+                    { question: "What is the plural of 'cat'?", options: ["Cats", "Cat's", "Caties", "Cattes"], answer: "Cats" }
+                ],
+                2: [
+                    { question: "Which literary device involves a comparison using 'like' or 'as'?", options: ["Metaphor", "Simile", "Personification", "Hyperbole"], answer: "Simile" },
+                    { question: "What is the passive voice of 'The dog chased the cat'?", options: ["The cat chased the dog.", "The cat was chased by the dog.", "The dog was chasing the cat.", "Chasing the cat was the dog."], answer: "The cat was chased by the dog." },
+                    { question: "Which of these is a compound sentence?", options: ["I like to read.", "She ran quickly.", "He sang, and she danced.", "After dinner, we watched a movie."], answer: "He sang, and she danced." },
+                    { question: "Identify the adverb in the sentence: 'The turtle moved incredibly slowly.'", options: ["turtle", "moved", "incredibly", "slowly"], answer: "incredibly" },
+                    { question: "What is an antonym for 'benevolent'?", options: ["Kind", "Generous", "Cruel", "Helpful"], answer: "Cruel" },
+                    { question: "Which type of poetry has 14 lines and a strict rhyme scheme?", options: ["Haiku", "Limerick", "Free Verse", "Sonnet"], answer: "Sonnet" },
+                    { question: "What is the correct punctuation for a list of three or more items?", options: ["Commas", "Semicolons", "Dashes", "Periods"], answer: "Commas" },
+                    { question: "Which of the following is a collective noun for a group of fish?", options: ["Flock", "Herd", "School", "Swarm"], answer: "School" },
+                    { question: "What is the main purpose of a comma splice?", options: ["To join two independent clauses incorrectly", "To introduce a list", "To set off an appositive", "To separate adjectives"], answer: "To join two independent clauses incorrectly" },
+                    { question: "Which figure of speech gives human qualities to inanimate objects or animals?", options: ["Alliteration", "Onomatopoeia", "Personification", "Imagery"], answer: "Personification" }
+                ],
+                3: [
+                    { question: "Which literary movement emphasized reason, individualism, and skepticism?", options: ["Romanticism", "Modernism", "Enlightenment", "Realism"], answer: "Enlightenment" },
+                    { question: "What is the grammatical term for a word that connects words, phrases, or clauses?", options: ["Adverb", "Preposition", "Conjunction", "Interjection"], answer: "Conjunction" },
+                    { question: "Which of Shakespeare's plays features the character Hamlet?", options: ["Macbeth", "Othello", "Romeo and Juliet", "Hamlet"], answer: "Hamlet" },
+                    { question: "What is the difference between 'affect' and 'effect'?", options: ["Affect is a noun, effect is a verb.", "Affect is a verb, effect is a noun.", "They are interchangeable.", "Affect means cause, effect means result."], answer: "Affect is a verb, effect is a noun." },
+                    { question: "What is the poetic meter used in most of Shakespeare's plays?", options: ["Trochaic Tetrameter", "Anapestic Dimeter", "Iambic Pentameter", "Dactylic Hexameter"], answer: "Iambic Pentameter" },
+                    { question: "Which type of logical fallacy involves attacking the person rather than their argument?", options: ["Straw Man", "Ad Hominem", "Red Herring", "False Dichotomy"], answer: "Ad Hominem" },
+                    { question: "What is the literary term for a sudden insight or realization?", options: ["Climax", "Resolution", "Epiphany", "Denouement"], answer: "Epiphany" },
+                    { question: "Which of the following sentences uses a semicolon correctly?", options: ["I like coffee; however, I prefer tea.", "She went to the store, and bought milk; bread; and eggs.", "He is tired; he should rest;.", "The sun is shining; the birds are singing."], answer: "I like coffee; however, I prefer tea." },
+                    { question: "What is the primary characteristic of stream of consciousness narration?", options: ["Linear plot progression", "Focus on external dialogue", "Mimicking the flow of a character's thoughts", "Strict adherence to traditional grammar"], answer: "Mimicking the flow of a character's thoughts" },
+                    { question: "In rhetoric, what does 'pathos' appeal to?", options: ["Logic", "Credibility", "Emotion", "Ethics"], answer: "Emotion" }
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentSubject = urlParams.get('subject');
+
+            if (currentSubject) {
+                document.getElementById('quizPageTitle').textContent = `Quiz for ${currentSubject}`;
+                document.getElementById('quizSubjectTitle').textContent = `Quiz - ${currentSubject}`;
+            } else {
+                document.getElementById('quizPageTitle').textContent = 'Quiz';
+                document.getElementById('quizSubjectTitle').textContent = 'Quiz';
+            }
+        });
+
+        function startQuizLevel(level) {
+            currentLevel = level;
+            currentQuestionIndex = 0;
+            score = 0;
+
+            // Get questions for the selected subject and level
+            if (quizData[currentSubject] && quizData[currentSubject][currentLevel]) {
+                questions = quizData[currentSubject][currentLevel];
+                // Shuffle questions to make it a bit different each time
+                questions = shuffleArray(questions);
+                // Ensure we only take the first 10 questions if there are more
+                questions = questions.slice(0, 10);
+            } else {
+                // Fallback if no questions are defined for this subject/level
+                questions = [
+                    { question: "No questions available for this level. Please go back.", options: ["A", "B", "C", "D"], answer: "A" }
+                ];
+                alert("No questions found for this subject and level. Please try another subject or level.");
+                return; // Stop the function if no questions
+            }
+
+            document.getElementById('levelSelection').style.display = 'none';
+            document.getElementById('quizArea').style.display = 'flex'; // Use flex to center content
+            document.getElementById('totalQuestions').textContent = questions.length; // Update total questions
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                const question = questions[currentQuestionIndex];
+                document.getElementById('currentQuestionNumber').textContent = currentQuestionIndex + 1;
+                document.getElementById('questionText').textContent = question.question;
+
+                const optionsContainer = document.getElementById('optionsContainer');
+                optionsContainer.innerHTML = ''; // Clear previous options
+
+                // Shuffle options for each question
+                const shuffledOptions = shuffleArray([...question.options]);
+
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'option-button';
+                    button.textContent = option;
+                    button.onclick = () => checkAnswer(button, question.answer);
+                    optionsContainer.appendChild(button);
+                });
+
+                document.getElementById('nextQuestionBtn').style.display = 'none'; // Hide next button initially
+                resetOptionColors(); // Reset colors of options
+            } else {
+                showResults();
+            }
+        }
+
+        function checkAnswer(selectedButton, correctAnswer) {
+            const options = document.querySelectorAll('.option-button');
+            options.forEach(button => {
+                button.disabled = true; // Disable all options after selection
+                if (button.textContent === correctAnswer) {
+                    button.classList.add('correct'); // Highlight correct answer
+                }
+                // If it's not the correct answer, but it was selected, mark as incorrect
+                if (button === selectedButton && selectedButton.textContent !== correctAnswer) {
+                    selectedButton.classList.add('incorrect');
+                }
+            });
+
+            if (selectedButton.textContent === correctAnswer) {
+                score++;
+            }
+            document.getElementById('nextQuestionBtn').style.display = 'block'; // Show next button
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            displayQuestion();
+        }
+
+        function showResults() {
+            document.getElementById('quizArea').style.display = 'none';
+            document.getElementById('resultArea').style.display = 'block';
+            document.getElementById('finalScore').textContent = score;
+        }
+
+        function resetOptionColors() {
+            const options = document.querySelectorAll('.option-button');
+            options.forEach(button => {
+                button.classList.remove('correct', 'incorrect');
+                button.disabled = false; // Re-enable for new question
+            });
+        }
+
+        // Utility function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+    </script>
+</body>
+</html>
